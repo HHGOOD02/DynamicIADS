@@ -32,6 +32,9 @@ redIADS:addEarlyWarningRadar("SAM-S300-77TH-SR")
 local connectionNodeLatakiaADC = StaticObject.getByName("LATAKIA-ADC-C2")
 local connectionNodeTripoliADC = StaticObject.getByName("TRIPOLI-ADC-C2")
 local connectionNodeAleppoADC = StaticObject.getByName("ALEPPO-ADC-C2")
+local connectionNode101BDE = StaticObject.getByName("101-AD-BDE-C2")
+local connectionNode102BDE = StaticObject.getByName("102-AD-BDE-C2")
+
 
     --Nodes for S-300 54K6
 local conenctionNode79th = Unit.getByName("SAM-S300-79TH-C2")
@@ -40,12 +43,17 @@ local connectionNode77th = Unit.getByName("SAM-S300-77TH-C2")
 
 --NW Air Defense Sector Command Center (Doing this ***after*** creating connection nodes, otherwise mist freaks out!)
 local nwSectorCommand = StaticObject.getByName("NW-SECTOR-COMMAND")
-redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(connectionNodeLatakiaADC, connectionNodeTripoliADC, connectionNodeAleppoADC)
+redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(connectionNodeLatakiaADC, connectionNodeTripoliADC, connectionNodeAleppoADC, connectionNode101BDE, connectionNode102BDE)
 
 --Connecting S300 complexes to respective ADC D4M1s
 redIADS:getSAMSiteByGroupName("SAM-S300-79TH-RGT"):addConnectionNode(connectionNodeLatakiaADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-78TH-RGT"):addConnectionNode(connectionNodeTripoliADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-77TH-RGT"):addConnectionNode(connectionNodeAleppoADC)
+redIADS:getSAMSiteByGroupName("SAM-S300-101-BDE-1-BN"):addConnectionNode(connectionNode101BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-101-BDE-2-BN"):addConnectionNode(connectionNode101BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-102-BDE-1-BN"):addConnectionNode(connectionNode102BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-102-BDE-2-BN"):addConnectionNode(connectionNode102BDE)
+
 
 --Search/early warning radars networked through D4M1 and 54K6
     --Latakia ADC
@@ -63,6 +71,11 @@ redIADS:getEarlyWarningRadarByUnitName("SAM-S300-77TH-SR"):addConnectionNode(con
 redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC, connectionNode77th)
 redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC, connectionNode77th)
 
+    --10th Independent Air Defense Corps
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-101-AD-BDE"):addConnectionNode(connectionNode101BDE)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-102-AD-BDE"):addConnectionNode(connectionNode102BDE)
+
+
 --Buk Regiments networked per battery through D4M1
     --Latakia ADC
 redIADS:getSAMSiteByGroupName("SAM-SA17-790TH-BTY-A"):addConnectionNode(connectionNodeLatakiaADC)
@@ -78,6 +91,13 @@ redIADS:getSAMSiteByGroupName("SAM-SA17-780TH-BTY-C"):addConnectionNode(connecti
 redIADS:getSAMSiteByGroupName("SAM-SA17-770TH-BTY-A"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA17-770TH-BTY-B"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA17-770TH-BTY-C"):addConnectionNode(connectionNodeAleppoADC)
+
+    --10th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA17-101-BDE-3-BN"):addConnectionNode(connectionNode101BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA17-101-BDE-4-BN"):addConnectionNode(connectionNode101BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA17-102-BDE-3-BN"):addConnectionNode(connectionNode102BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA17-102-BDE-4-BN"):addConnectionNode(connectionNode102BDE)
+
 
 --Tor PD batteries networked through D4M1
     --Latakia ADC
@@ -95,6 +115,10 @@ redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-D"):addConnectionNode(con
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-A"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-B"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-C"):addConnectionNode(connectionNodeAleppoADC)
+
+    --10th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA15-101-BDE-PD-BTY"):addConnectionNode(connectionNode101BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA15-102-BDE-PD-BTY"):addConnectionNode(connectionNode102BDE)
 
 --Creating objects from ADC Point Defense Batteries to pass as PD providers
     --Latakia ADC
