@@ -57,28 +57,37 @@ local nwSectorCommand = StaticObject.getByName("NW-SECTOR-COMMAND")
 local swSectorCommand = StaticObject.getByName("SW-SECTOR-COMMAND")
 local cSectorCommand = StaticObject.getByName("C-SECTOR-COMMAND")
 local nSectorCommand = StaticObject.getByName("N-SECTOR-COMMAND")
-redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(connectionNodeLatakiaADC, connectionNodeTripoliADC, connectionNodeAleppoADC, connectionNode101BDE, connectionNode102BDE)
-redIADS:addCommandCenter(swSectorCommand):addConnectionNode(connectionNodeBeirutADC, connectionNodeHaifaADC, connectionNodeDamascusADC, connectionNode201BDE, connectionNode202BDE)
-redIADS:addCommandCenter(cSectorCommand):addConnectionNode(connectionNode300BDE)
-redIADS:addCommandCenter(nSectorCommand):addConnectionNode(connectionNode400BDE)
+local af_Command = StaticObject.getByName("EMPIRE-AIR-DEFENSE-COMMAND")
+redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(swSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(cSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(nSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(af_Command):addConnectionNode(nSectorCommand, cSectorCommand, swSectorCommand, nwSectorCommand)
 
 --Connecting S300 complexes to respective ADC D4M1s
+    --NW Sector Command
 redIADS:getSAMSiteByGroupName("SAM-S300-79TH-RGT"):addConnectionNode(connectionNodeLatakiaADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-78TH-RGT"):addConnectionNode(connectionNodeTripoliADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-77TH-RGT"):addConnectionNode(connectionNodeAleppoADC)
-redIADS:getSAMSiteByGroupName("SAM-S300-83RD-RGT"):addConnectionNode(connectionNodeBeirutADC)
-redIADS:getSAMSiteByGroupName("SAM-S300-84TH-RGT"):addConnectionNode(connectionNodeHaifaADC)
-redIADS:getSAMSiteByGroupName("SAM-S300-85TH-RGT"):addConnectionNode(connectionNodeDamascusADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-101-BDE-1-BN"):addConnectionNode(connectionNode101BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-101-BDE-2-BN"):addConnectionNode(connectionNode101BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-102-BDE-1-BN"):addConnectionNode(connectionNode102BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-102-BDE-2-BN"):addConnectionNode(connectionNode102BDE)
+
+    --SW Sector Command
+redIADS:getSAMSiteByGroupName("SAM-S300-83RD-RGT"):addConnectionNode(connectionNodeBeirutADC)
+redIADS:getSAMSiteByGroupName("SAM-S300-84TH-RGT"):addConnectionNode(connectionNodeHaifaADC)
+redIADS:getSAMSiteByGroupName("SAM-S300-85TH-RGT"):addConnectionNode(connectionNodeDamascusADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-201-BDE-1-BN"):addConnectionNode(connectionNode201BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-201-BDE-2-BN"):addConnectionNode(connectionNode201BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-202-BDE-1-BN"):addConnectionNode(connectionNode202BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-202-BDE-2-BN"):addConnectionNode(connectionNode202BDE)
+
+    --Central Sector Command
 redIADS:getSAMSiteByGroupName("SAM-S300-300-BDE-1-BN"):addConnectionNode(connectionNode300BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-300-BDE-2-BN"):addConnectionNode(connectionNode300BDE)
+
+    --Northern Sector Command
 redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-1-BN"):addConnectionNode(connectionNode400BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-2-BN"):addConnectionNode(connectionNode400BDE)
 
