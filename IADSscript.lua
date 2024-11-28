@@ -41,6 +41,8 @@ local connectionNode101BDE = StaticObject.getByName("101-AD-BDE-C2")
 local connectionNode102BDE = StaticObject.getByName("102-AD-BDE-C2")
 local connectionNode201BDE = StaticObject.getByName("201-AD-BDE-C2")
 local connectionNode202BDE = StaticObject.getByName("202-AD-BDE-C2")
+local connectionNode300BDE = StaticObject.getByName("300-AD-BDE-C2")
+local connectionNode400BDE = StaticObject.getByName("400-AD-BDE-C2")
 
     --Nodes for S-300 54K6
 local connectionNode85th = Unit.getByName("SAM-S300-85TH-C2")
@@ -53,8 +55,12 @@ local connectionNode77th = Unit.getByName("SAM-S300-77TH-C2")
 --NW Air Defense Sector Command Center (Doing this ***after*** creating connection nodes, otherwise mist freaks out!)
 local nwSectorCommand = StaticObject.getByName("NW-SECTOR-COMMAND")
 local swSectorCommand = StaticObject.getByName("SW-SECTOR-COMMAND")
+local cSectorCommand = StaticObject.getByName("C-SECTOR-COMMAND")
+local nSectorCommand = StaticObject.getByName("N-SECTOR-COMMAND")
 redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(connectionNodeLatakiaADC, connectionNodeTripoliADC, connectionNodeAleppoADC, connectionNode101BDE, connectionNode102BDE)
 redIADS:addCommandCenter(swSectorCommand):addConnectionNode(connectionNodeBeirutADC, connectionNodeHaifaADC, connectionNodeDamascusADC, connectionNode201BDE, connectionNode202BDE)
+redIADS:addCommandCenter(cSectorCommand):addConnectionNode(connectionNode300BDE)
+redIADS:addCommandCenter(nSectorCommand):addConnectionNode(connectionNode400BDE)
 
 --Connecting S300 complexes to respective ADC D4M1s
 redIADS:getSAMSiteByGroupName("SAM-S300-79TH-RGT"):addConnectionNode(connectionNodeLatakiaADC)
@@ -71,8 +77,10 @@ redIADS:getSAMSiteByGroupName("SAM-S300-201-BDE-1-BN"):addConnectionNode(connect
 redIADS:getSAMSiteByGroupName("SAM-S300-201-BDE-2-BN"):addConnectionNode(connectionNode201BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-202-BDE-1-BN"):addConnectionNode(connectionNode202BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-202-BDE-2-BN"):addConnectionNode(connectionNode202BDE)
-
-
+redIADS:getSAMSiteByGroupName("SAM-S300-300-BDE-1-BN"):addConnectionNode(connectionNode300BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-300-BDE-2-BN"):addConnectionNode(connectionNode300BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-1-BN"):addConnectionNode(connectionNode400BDE)
+redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-2-BN"):addConnectionNode(connectionNode400BDE)
 
 --Search/early warning radars networked through D4M1 and 54K6
     --Latakia ADC
@@ -112,6 +120,12 @@ redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-102-AD-BDE"):addConnectionNode(
     --20th Independent Air Defense Corps
 redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-201-AD-BDE"):addConnectionNode(connectionNode201BDE)
 redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-202-AD-BDE"):addConnectionNode(connectionNode202BDE)
+
+    --30th Independent Air Defense Corps
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-300-AD-BDE"):addConnectionNode(connectionNode300BDE)
+
+    --40th Independent Air Defense Corps
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-400-AD-BDE"):addConnectionNode(connectionNode400BDE)
     
 
 --Buk Regiments networked per battery through D4M1
@@ -157,6 +171,13 @@ redIADS:getSAMSiteByGroupName("SAM-SA17-201-BDE-4-BN"):addConnectionNode(connect
 redIADS:getSAMSiteByGroupName("SAM-SA17-202-BDE-3-BN"):addConnectionNode(connectionNode202BDE)
 redIADS:getSAMSiteByGroupName("SAM-SA17-202-BDE-4-BN"):addConnectionNode(connectionNode202BDE)
 
+    --30th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA17-300-BDE-3-BN"):addConnectionNode(connectionNode300BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA17-300-BDE-4-BN"):addConnectionNode(connectionNode300BDE)
+
+    --40th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA17-400-BDE-3-BN"):addConnectionNode(connectionNode400BDE)
+redIADS:getSAMSiteByGroupName("SAM-SA17-400-BDE-4-BN"):addConnectionNode(connectionNode400BDE)
 
 --Tor PD batteries networked through D4M1
     --Latakia ADC
@@ -198,6 +219,12 @@ redIADS:getSAMSiteByGroupName("SAM-SA15-102-BDE-PD-BTY"):addConnectionNode(conne
     --20th Independent Air Defense Corps
 redIADS:getSAMSiteByGroupName("SAM-SA15-201-BDE-PD-BTY"):addConnectionNode(connectionNode201BDE)
 redIADS:getSAMSiteByGroupName("SAM-SA15-202-BDE-PD-BTY"):addConnectionNode(connectionNode202BDE)
+
+    --30th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA15-300-BDE-PD-BTY"):addConnectionNode(connectionNode300BDE)
+
+    --40th Independent Air Defense Corps
+redIADS:getSAMSiteByGroupName("SAM-SA15-400-BDE-PD-BTY"):addConnectionNode(connectionNode400BDE)
 
 --Creating objects from ADC Point Defense Batteries to pass as PD providers
     --Latakia ADC
