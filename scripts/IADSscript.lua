@@ -29,8 +29,21 @@ redIADS:addEarlyWarningRadar("SAM-S300-83RD-SR")
 redIADS:addEarlyWarningRadar("SAM-S300-84TH-SR")
 redIADS:addEarlyWarningRadar("SAM-S300-85TH-SR")
 
---implementing IADS C2 topography [NOTE: S-300 Regiments with 54K6 are able to control on-net EWRs organic to an S-300 complex, but not dissimilar SAM systems]
-    --Nodes for ADC D4M1s
+--implementing IADS C2 topography
+
+--NW Air Defense Sector Command Center (Doing this ***after*** creating connection nodes, otherwise mist freaks out!)
+local nwSectorCommand = StaticObject.getByName("NW-SECTOR-COMMAND")
+local swSectorCommand = StaticObject.getByName("SW-SECTOR-COMMAND")
+local cSectorCommand = StaticObject.getByName("C-SECTOR-COMMAND")
+local nSectorCommand = StaticObject.getByName("N-SECTOR-COMMAND")
+local af_Command = StaticObject.getByName("EMPIRE-AIR-DEFENSE-COMMAND")
+redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(swSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(cSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(nSectorCommand):addConnectionNode(af_Command)
+redIADS:addCommandCenter(af_Command)
+
+--Nodes for ADC D4M1s
 local connectionNodeLatakiaADC = StaticObject.getByName("LATAKIA-ADC-C2")
 local connectionNodeTripoliADC = StaticObject.getByName("TRIPOLI-ADC-C2")
 local connectionNodeAleppoADC = StaticObject.getByName("ALEPPO-ADC-C2")
@@ -44,27 +57,7 @@ local connectionNode202BDE = StaticObject.getByName("202-AD-BDE-C2")
 local connectionNode300BDE = StaticObject.getByName("300-AD-BDE-C2")
 local connectionNode400BDE = StaticObject.getByName("400-AD-BDE-C2")
 
-    --Nodes for S-300 54K6
-local connectionNode85th = Unit.getByName("SAM-S300-85TH-C2")
-local connectionNode84th = Unit.getByName("SAM-S300-84TH-C2")
-local connectionNode83rd = Unit.getByName("SAM-S300-83RD-C2")    
-local connectionNode79th = Unit.getByName("SAM-S300-79TH-C2")
-local connectionNode78th = Unit.getByName("SAM-S300-78TH-C2")
-local connectionNode77th = Unit.getByName("SAM-S300-77TH-C2")
-
---NW Air Defense Sector Command Center (Doing this ***after*** creating connection nodes, otherwise mist freaks out!)
-local nwSectorCommand = StaticObject.getByName("NW-SECTOR-COMMAND")
-local swSectorCommand = StaticObject.getByName("SW-SECTOR-COMMAND")
-local cSectorCommand = StaticObject.getByName("C-SECTOR-COMMAND")
-local nSectorCommand = StaticObject.getByName("N-SECTOR-COMMAND")
-local af_Command = StaticObject.getByName("EMPIRE-AIR-DEFENSE-COMMAND")
-redIADS:addCommandCenter(nwSectorCommand):addConnectionNode(af_Command)
-redIADS:addCommandCenter(swSectorCommand):addConnectionNode(af_Command)
-redIADS:addCommandCenter(cSectorCommand):addConnectionNode(af_Command)
-redIADS:addCommandCenter(nSectorCommand):addConnectionNode(af_Command)
-redIADS:addCommandCenter(af_Command):addConnectionNode(nSectorCommand, cSectorCommand, swSectorCommand, nwSectorCommand)
-
---Connecting S300 complexes to respective ADC D4M1s
+--Connecting S300 complexes to respective ADC/Brigade D4M1s
     --NW Sector Command
 redIADS:getSAMSiteByGroupName("SAM-S300-79TH-RGT"):addConnectionNode(connectionNodeLatakiaADC)
 redIADS:getSAMSiteByGroupName("SAM-S300-78TH-RGT"):addConnectionNode(connectionNodeTripoliADC)
@@ -91,36 +84,36 @@ redIADS:getSAMSiteByGroupName("SAM-S300-300-BDE-2-BN"):addConnectionNode(connect
 redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-1-BN"):addConnectionNode(connectionNode400BDE)
 redIADS:getSAMSiteByGroupName("SAM-S300-400-BDE-2-BN"):addConnectionNode(connectionNode400BDE)
 
---Search/early warning radars networked through D4M1 and 54K6
+--Connecting Search/Early Warning Radars to respective ADC/Brigade D4M1s
     --Latakia ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-79TH-SR"):addConnectionNode(connectionNodeLatakiaADC, connectionNode79th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-LATAKIA"):addConnectionNode(connectionNodeLatakiaADC, connectionNode79th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-LATAKIA"):addConnectionNode(connectionNodeLatakiaADC, connectionNode79th)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-79TH-SR"):addConnectionNode(connectionNodeLatakiaADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-LATAKIA"):addConnectionNode(connectionNodeLatakiaADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-LATAKIA"):addConnectionNode(connectionNodeLatakiaADC)
 
     --Tripoli ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-78TH-SR"):addConnectionNode(connectionNodeTripoliADC, connectionNode78th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-TRIPOLI"):addConnectionNode(connectionNodeTripoliADC, connectionNode78th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-TRIPOLI"):addConnectionNode(connectionNodeTripoliADC, connectionNode78th)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-78TH-SR"):addConnectionNode(connectionNodeTripoliADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-TRIPOLI"):addConnectionNode(connectionNodeTripoliADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-TRIPOLI"):addConnectionNode(connectionNodeTripoliADC)
 
     --Aleppo ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-77TH-SR"):addConnectionNode(connectionNodeAleppoADC, connectionNode77th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC, connectionNode77th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC, connectionNode77th)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-77TH-SR"):addConnectionNode(connectionNodeAleppoADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-ALEPPO"):addConnectionNode(connectionNodeAleppoADC)
 
     --Beirut ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-83RD-SR"):addConnectionNode(connectionNodeBeirutADC, connectionNode83rd)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-BEIRUT"):addConnectionNode(connectionNodeBeirutADC, connectionNode83rd)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-BEIRUT"):addConnectionNode(connectionNodeBeirutADC, connectionNode83rd)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-83RD-SR"):addConnectionNode(connectionNodeBeirutADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-BEIRUT"):addConnectionNode(connectionNodeBeirutADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-BEIRUT"):addConnectionNode(connectionNodeBeirutADC)
 
     --Haifa ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-84TH-SR"):addConnectionNode(connectionNodeHaifaADC, connectionNode84th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-HAIFA"):addConnectionNode(connectionNodeHaifaADC, connectionNode84th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-HAIFA"):addConnectionNode(connectionNodeHaifaADC, connectionNode84th)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-84TH-SR"):addConnectionNode(connectionNodeHaifaADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-HAIFA"):addConnectionNode(connectionNodeHaifaADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-HAIFA"):addConnectionNode(connectionNodeHaifaADC)
 
     --Damascus ADC
-redIADS:getEarlyWarningRadarByUnitName("SAM-S300-85TH-SR"):addConnectionNode(connectionNodeDamascusADC, connectionNode85th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-DAMASCUS"):addConnectionNode(connectionNodeDamascusADC, connectionNode85th)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-DAMASCUS"):addConnectionNode(connectionNodeDamascusADC, connectionNode85th)
+redIADS:getEarlyWarningRadarByUnitName("SAM-S300-85TH-SR"):addConnectionNode(connectionNodeDamascusADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-DAMASCUS"):addConnectionNode(connectionNodeDamascusADC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-DAMASCUS"):addConnectionNode(connectionNodeDamascusADC)
     
     --10th Independent Air Defense Corps
 redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-101-AD-BDE"):addConnectionNode(connectionNode101BDE)
@@ -204,6 +197,7 @@ redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-D"):addConnectionNode(con
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-A"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-B"):addConnectionNode(connectionNodeAleppoADC)
 redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-C"):addConnectionNode(connectionNodeAleppoADC)
+redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-D"):addConnectionNode(connectionNodeAleppoADC)
 
     --Beirut ADC
 redIADS:getSAMSiteByGroupName("SAM-SA15-BEIRUT-PD-BTY-A"):addConnectionNode(connectionNodeBeirutADC)
@@ -238,26 +232,51 @@ redIADS:getSAMSiteByGroupName("SAM-SA15-400-BDE-PD-BTY"):addConnectionNode(conne
 --Creating objects from ADC Point Defense Batteries to pass as PD providers
     --Latakia ADC
 local latakiaPointDefenseBtyA = redIADS:getSAMSiteByGroupName("SAM-SA15-LATAKIA-PD-BTY-A")
-local latakiaPointDefenseBtyB = redIADS:getSAMSiteByGroupName("SAM-SA15-LATAKIA-PD-BTY-B")
 local latakiaPointDefenseBtyC = redIADS:getSAMSiteByGroupName("SAM-SA15-LATAKIA-PD-BTY-C")
-    
+
     --Tripoli ADC
 local tripoliPointDefenseBtyA = redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-A")
 local tripoliPointDefenseBtyB = redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-B")
 local tripoliPointDefenseBtyC = redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-C")
-local tripoliPointDefenseBtyD = redIADS:getSAMSiteByGroupName("SAM-SA15-TRIPOLI-PD-BTY-D")
 local tripoliPointDefense708thBtyC = redIADS:getSAMSiteByGroupName("SAM-SA17-780TH-BTY-C")
+
+    --Aleppo ADC
+local aleppoPointDefense770thBtyA = redIADS:getSAMSiteByGroupName("SAM-SA17-770TH-BTY-A")
+local aleppoPointDefenseBtyC = redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-C")
+local aleppoPointDefenseBtyD = redIADS:getSAMSiteByGroupName("SAM-SA15-ALEPPO-PD-BTY-D")
+
+    --Damascus ADC
+local damascusPointDefenseBtyC = redIADS:getSAMSiteByGroupName("SAM-SA15-DAMASCUS-PD-BTY-C")
+local damascusPointDefenseBtyA = redIADS:getSAMSiteByGroupName("SAM-SA15-DAMASCUS-PD-BTY-A")
+local damascusPointDefense850thBtyA = redIADS:getSAMSiteByGroupName("SAM-SA17-850TH-BTY-A")
+local damascusPointDefense850thBtyC = redIADS:getSAMSiteByGroupName("SAM-SA17-850TH-BTY-C")
+
+    --Haifa ADC
+local haifaPointDefenseBtyA = redIADS:getSAMSiteByGroupName("SAM-SA15-HAIFA-PD-BTY-A")
+local haifaPointDefenseBtyB = redIADS:getSAMSiteByGroupName("SAM-SA15-HAIFA-PD-BTY-B")
+local haifaPointDefenseBtyC = redIADS:getSAMSiteByGroupName("SAM-SA15-HAIFA-PD-BTY-C")
+
 
 --Nominating ADC Point Defense batteries as providers to EWRs/LORAD
     --Latakia ADC
 redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-LATAKIA"):addPointDefence(latakiaPointDefenseBtyC)
-redIADS:getSAMSiteByGroupName("SAM-SA17-790TH-BTY-A"):addPointDefence(latakiaPointDefenseBtyB)
-redIADS:getSAMSiteByGroupName("SAM-SA17-790TH-BTY-B"):addPointDefence(latakiaPointDefenseBtyB)
 redIADS:getSAMSiteByGroupName("SAM-S300-79TH-RGT"):addPointDefence(latakiaPointDefenseBtyA)
 
     --Tripoli ADC
 redIADS:getSAMSiteByGroupName("SAM-S300-78TH-RGT"):addPointDefence(tripoliPointDefenseBtyC)
-redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-TRIPOLI"):addPointDefence(tripoliPointDefenseBtyA, tripoliPointDefense708thBtyC)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-TRIPOLI"):addPointDefence(tripoliPointDefenseBtyA, tripoliPointDefenseBtyB, tripoliPointDefense708thBtyC)
+
+    --Aleppo ADC
+redIADS:getEarlyWarningRadarByUnitName("EWR-LRDG-ALEPPO"):addPointDefence(aleppoPointDefense770thBtyA)
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-ALEPPO"):addPointDefence(aleppoPointDefenseBtyC)
+redIADS:getSAMSiteByGroupName("SAM-S300-77TH-RGT"):addPointDefence(aleppoPointDefenseBtyD)
+
+    --Damascus ADC
+redIADS:getEarlyWarningRadarByUnitName("EWR-LA-LRDG-DAMASCUS"):addPointDefence(damascusPointDefense850thBtyC)
+redIADS:getSAMSiteByGroupName("SAM-S300-85TH-RGT"):addPointDefence(damascusPointDefense850thBtyA, damascusPointDefense850thBtyC, damascusPointDefense850thBtyA, damascusPointDefense850thBtyC)
+
+    --Haifa ADC
+redIADS:getSAMSiteByGroupName("SAM-S300-84TH-RGT"):addPointDefence(haifaPointDefenseBtyA, haifaPointDefenseBtyB, haifaPointDefenseBtyC)
 
 --activate the radio menu to toggle IADS Status output
 redIADS:addRadioMenu()
