@@ -464,13 +464,3 @@ A2ADispatcher:SetTacticalDisplay(true)
 
 --Activates A2ADispatcher
 A2ADispatcher:Start()
-
---test to see which groups are added and removed to the SET_GROUP at runtime by Skynet:
-function outputNames()
-	env.info("IADS Radar Groups added by Skynet:")
-	env.info(DetectionSetGroup:GetObjectNames())
-end
-
-mist.scheduleFunction(outputNames, self, 1, 2)
---end test
-end
