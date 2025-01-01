@@ -278,7 +278,199 @@ redIADS:getSAMSiteByGroupName("SAM-S300-85TH-RGT"):addPointDefence(damascusPoint
     --Haifa ADC
 redIADS:getSAMSiteByGroupName("SAM-S300-84TH-RGT"):addPointDefence(haifaPointDefenseBtyA, haifaPointDefenseBtyB, haifaPointDefenseBtyC)
 
---activate the radio menu to toggle IADS Status output
+--Activate the radio menu to toggle IADS Status output
 redIADS:addRadioMenu()
 
 redIADS:activate()
+
+--Setting up MOOSE A2A GCI/CAP
+    
+--Initializing a SET GROUP object and using Skynet's MOOSE integration to pass the redIADS EWR network data  
+redDetectionSetGroup = SET_GROUP:New()
+redIADS:addMooseSetGroup(redDetectionSetGroup)
+
+--Creating a detection object which groups detected aircraft within a 30km sphere
+Detection = DETECTION_AREAS:New(DetectionSetGroup, 30000)
+
+--Initializing Air to Air Dispatcher using the Detection object
+A2ADispatcher = AI_A2A_DISPATCHER:New(Detection)
+
+--Setting A2A and GCI engagement radii to 150km and 200km respectively
+A2ADispatcher:SetEngageRadius(150000)
+A2ADispatcher:SetGciRadius(200000)
+
+--Creating and passing data for a border using the waypoints of a late activated group called "EMPIRE-BORDER"
+EmpireBorderZone = ZONE_POLYGON:New("EMPIRE-BORDER", GROUP:FindByName("EMPIRE-BORDER"))
+A2ADispatcher:SetBorderZone(EmpireBorderZone)
+
+--Setting up IAA-CAF Squadrons (Regiments)
+
+    --Configuring Squadron defaults
+A2ADispatcher:SetDefaultTakeOffFromParkingCold()
+A2ADispatcher:SetDefaultLandingAtEngineShutdown()
+
+    --1st Fighter Division
+A2ADispatcher:SetSquadron("101st Fighter Regiment", "Ramat David", "Su-27", 12) -- CAP @ STEELTOE STATION
+A2ADispatcher:SetSquadron("102nd Fighter Regiment", "Ramat David", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("103rd Fighter Regiment", "Ramat David", "Su-27", 12) -- GCI
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("101st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("102nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("103rd Fighter Regiment", 2)
+
+    --2nd Fighter Division
+A2ADispatcher:SetSquadron("201st Fighter Regiment", "Damascus", "Mig-29", 12) -- CAP @ ANGEL STATION
+A2ADispatcher:SetSquadron("202nd Fighter Regiment", "Marj Ruhayyii", "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("203rd Fighter Regiment", "Marj Ruhayyii", "Mig-29", 12) -- GCI
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("201st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("202nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("203rd Fighter Regiment", 2)
+
+        --Adjusting sortie overhead
+A2ADispatcher:SetSquadronOverhead("201st Fighter Regiment", 1.5)
+A2ADispatcher:SetSquadronOverhead("202nd Fighter Regiment", 1.5)
+A2ADispatcher:SetSquadronOverhead("203rd Fighter Regiment", 1.5)
+
+    --3rd Fighter Division
+A2ADispatcher:SetSquadron("301st Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- CAP @ POSEIDON STATION
+A2ADispatcher:SetSquadron("302nd Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("303rd Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- CAP @ POSEIDON STATION
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("301st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("302nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("303rd Fighter Regiment", 2)
+
+    --4th Fighter Division
+A2ADispatcher:SetSquadron("401st Fighter Regiment", "Shayrat", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("402nd Fighter Regiment", "Shayrat", "Su-27", 12) -- CAP @ CHARLIE STATION
+A2ADispatcher:SetSquadron("403rd Fighter Regiment", "Shayrat", "Su-27", 12) -- CAP @ CHARLIE STATION
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("401st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("402nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("403rd Fighter Regiment", 2)
+
+    --5th Fighter Division
+A2ADispatcher:SetSquadron("501st Fighter Regiment", "Hama", "Mig-29", 12) -- CAP @ TOPHAT STATION
+A2ADispatcher:SetSquadron("502nd Fighter Regiment", "Hama", "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("503rd Fighter Regiment", "Hama", "Mig-29", 12) -- GCI
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("501st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("502nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("503rd Fighter Regiment", 2)
+
+        --Adjusting sortie overhead
+A2ADispatcher:SetSquadronOverhead("501st Fighter Regiment", 1.5)
+A2ADispatcher:SetSquadronOverhead("502nd Fighter Regiment", 1.5)
+A2ADispatcher:SetSquadronOverhead("503rd Fighter Regiment", 1.5)
+
+    --6th Fighter Division
+A2ADispatcher:SetSquadron("601st Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- CAP @ WHISKEY STATION
+A2ADispatcher:SetSquadron("602nd Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("603rd Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- CAP @ TOPHAT STATION
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("601st Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("602nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("603rd Fighter Regiment", 2)
+
+    --7th Fighter Division
+A2ADispatcher:SetSquadron("701st Fighter Regiment", "Jirah", "Su-27", 12) -- CAP @ WHISKEY STATION
+A2ADispatcher:SetSquadron("702nd Fighter Regiment", "Jirah", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("703rd Fighter Regiment", "Tabqa", "Su-27", 12) -- CAP @ BACKPLATE STATION
+
+        --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("701st Fighter Regiment", 2) 
+A2ADispatcher:SetSquadronGrouping("702nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("703rd Fighter Regiment", 2) 
+
+--Initializing CAP Stations from Trigger Zones
+CAPStationBACKPLATE = ZONE:New("CAP-BACKPLATE")
+CAPStationWHISKEY = ZONE:New("CAP-WHISKEY")
+CAPStationTOPHAT = ZONE:New("CAP-TOPHAT")
+CAPStationCHARLIE = ZONE:New("CAP-CHARLIE")
+CAPStationANGEL = ZONE:New("CAP-ANGEL")
+CAPStationPOSEIDON = Zone:New("CAP-POSEIDON")
+CAPStationSTEELTOE = Zoine:New("CAP-STEELTOE")
+
+--Assigning CAP Missions
+
+    --BACKPLATE STATION
+A2ADispatcher:SetSquadronCap("703rd Fighter Regiment", CAPStationBACKPLATE, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("703rd Fighter Regiment", 2, 30, 120, 1)
+
+    --WHISKEY STATION
+A2ADispatcher:SetSquadronCap("701st Fighter Regiment", CAPStationWHISKEY, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("701st Fighter Regiment", 1, 30, 120, 1)
+
+A2ADispatcher:SetSquadronCap("601st Fighter Regiment", CAPStationWHISKEY, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("601st Fighter Regiment", 1, 30, 120, 1)
+
+    --TOPHAT STATION
+A2ADispatcher:SetSquadronCap("603rd Fighter Regiment", CAPStationTOPHAT, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("603rd Fighter Regiment", 1, 30, 120, 1)
+
+A2ADispatcher:SetSquadronCap("501st Fighter Regiment", CAPStationTOPHAT, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("501st Fighter Regiment", 1, 30, 120, 1)
+
+    --CHARLIE STATION
+A2ADispatcher:SetSquadronCap("402nd Fighter Regiment", CAPStationCHARLIE, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("402nd Fighter Regiment", 1, 30, 120, 1)
+
+A2ADispatcher:SetSquadronCap("403rd Fighter Regiment", CAPStationCHARLIE, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("403rd Fighter Regiment", 1, 30, 120, 1)
+
+    --ANGEL STATION
+A2ADispatcher:SetSquadronCap("201st Fighter Regiment", CAPStationANGEL, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("201st Fighter Regiment", 2, 30, 120, 1)
+
+    --POSEIDON STATION
+A2ADispatcher:SetSquadronCap("301st Fighter Regiment", CAPStationPOSEIDON, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("301st Fighter Regiment", 1, 30, 120, 1)
+
+A2ADispatcher:SetSquadronCap("303rd Fighter Regiment", CAPStationPOSEIDON, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("303rd Fighter Regiment", 1, 30, 120, 1)
+
+    --STEELTOE STATION
+A2ADispatcher:SetSquadronCap("101st Fighter Regiment", CAPStationSTEELTOE, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("101st Fighter Regiment", 2, 30, 120, 1)
+
+--Assigning GCI Missions
+
+A2ADispatcher:SetSquadronGci("102nd Fighter Regiment", 800, 1200)
+A2ADispatcher:SetSquadronGci("103rd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("202nd Fighter Regiment", 800, 1200)
+A2ADispatcher:SetSquadronGci("203rd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("302nd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("401st Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("502nd Fighter Regiment", 800, 1200)
+A2ADispatcher:SetSquadronGci("503rd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("602nd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("702nd Fighter Regiment", 800, 1200)
+
+--Showing Display
+A2ADispatcher:SetTacticalDisplay(true)
+
+--Activates A2ADispatcher
+A2ADispatcher:Start()
+
+--test to see which groups are added and removed to the SET_GROUP at runtime by Skynet:
+function outputNames()
+	env.info("IADS Radar Groups added by Skynet:")
+	env.info(DetectionSetGroup:GetObjectNames())
+end
+
+mist.scheduleFunction(outputNames, self, 1, 2)
+--end test
+end
