@@ -283,7 +283,7 @@ redIADS:getSAMSiteByGroupName("SAM-S300-85TH-RGT"):addPointDefence(damascusPoint
 redIADS:getSAMSiteByGroupName("SAM-S300-84TH-RGT"):addPointDefence(haifaPointDefenseBtyA, haifaPointDefenseBtyB, haifaPointDefenseBtyC)
 
 --Activate the radio menu to toggle IADS Status output
-redIADS:addRadioMenu()
+--redIADS:addRadioMenu()
 
 redIADS:activate()
 
@@ -291,10 +291,10 @@ redIADS:activate()
     
 --Initializing a SET GROUP object and using Skynet's MOOSE integration to pass the redIADS EWR network data  
 DetectionSetGroup = SET_GROUP:New()
-redIADS:addMooseSetGroup( DetectionSetGroup )
+redIADS:addMooseSetGroup(DetectionSetGroup 
 
---Creating a detection object which groups detected aircraft within a 200km sphere
-Detection = DETECTION_AREAS:New( DetectionSetGroup, 200000 )
+--Creating a detection object which groups detected aircraft within a 20km sphere
+Detection = DETECTION_AREAS:New( DetectionSetGroup, 20000 )
 
 --Initializing Air to Air Dispatcher using the Detection object
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
@@ -468,5 +468,14 @@ A2ADispatcher:SetTacticalDisplay(true)
 
 --Activates A2ADispatcher
 A2ADispatcher:Start()
+
+--test to see which groups are added and removed to the SET_GROUP at runtime by Skynet:
+function outputNames()
+	env.info("IADS Radar Groups added by Skynet:")
+	env.info(DetectionSetGroup:GetObjectNames())
+end
+
+mist.scheduleFunction(outputNames, self, 1, 2)
+--end test
 
 end
