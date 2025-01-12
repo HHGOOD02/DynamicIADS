@@ -286,14 +286,14 @@ redIADS:activate()
 --Setting up MOOSE A2A GCI/CAP
     
 --Initializing a SET GROUP object and using Skynet's MOOSE integration to pass the redIADS EWR network data  
-redDetectionSetGroup = SET_GROUP:New()
-redIADS:addMooseSetGroup(redDetectionSetGroup)
+DetectionSetGroup = SET_GROUP:New()
+redIADS:addMooseSetGroup( DetectionSetGroup )
 
 --Creating a detection object which groups detected aircraft within a 30km sphere
-Detection = DETECTION_AREAS:New(DetectionSetGroup, 30000)
+Detection = DETECTION_AREAS:New( DetectionSetGroup, 30000 )
 
 --Initializing Air to Air Dispatcher using the Detection object
-A2ADispatcher = AI_A2A_DISPATCHER:New(Detection)
+A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 
 --Setting A2A and GCI engagement radii to 150km and 200km respectively
 A2ADispatcher:SetEngageRadius(150000)
