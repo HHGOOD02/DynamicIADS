@@ -1,21 +1,25 @@
+do
+
 redIADS = SkynetIADS:create("EMPIRE")
 
----debug settings remove from here on if you do not wan"t any output on what the IADS is doing by default
-local iadsDebug = redIADS:getDebugSettings()
+local iadsDebug = redIADS:getDebugSettings()  
 iadsDebug.IADSStatus = true
-iadsDebug.radarWentDark = true
 iadsDebug.contacts = true
+
+--[[
+iadsDebug.radarWentDark = true
 iadsDebug.radarWentLive = true
-iadsDebug.noWorkingCommmandCenter = true
 iadsDebug.ewRadarNoConnection = true
-iadsDebug.samNoConnection = false
-iadsDebug.addedEWRadar = false
-iadsDebug.hasNoPower = false
+iadsDebug.samNoConnection = true
+iadsDebug.jammerProbability = true
+iadsDebug.addedEWRadar = true
+iadsDebug.hasNoPower = true
+iadsDebug.addedSAMSite = true
+iadsDebug.warnings = true
 iadsDebug.harmDefence = true
 iadsDebug.samSiteStatusEnvOutput = true
 iadsDebug.earlyWarningRadarStatusEnvOutput = true
-iadsDebug.commandCenterStatusEnvOutput = true
----end remove debug ---
+--]]
 
 --Adding SAMs to IADS by group name prefix
 redIADS:addSAMSitesByPrefix("SAM")
@@ -289,8 +293,8 @@ redIADS:activate()
 DetectionSetGroup = SET_GROUP:New()
 redIADS:addMooseSetGroup( DetectionSetGroup )
 
---Creating a detection object which groups detected aircraft within a 30km sphere
-Detection = DETECTION_AREAS:New( DetectionSetGroup, 30000 )
+--Creating a detection object which groups detected aircraft within a 200km sphere
+Detection = DETECTION_AREAS:New( DetectionSetGroup, 200000 )
 
 --Initializing Air to Air Dispatcher using the Detection object
 A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
@@ -464,3 +468,5 @@ A2ADispatcher:SetTacticalDisplay(true)
 
 --Activates A2ADispatcher
 A2ADispatcher:Start()
+
+end
