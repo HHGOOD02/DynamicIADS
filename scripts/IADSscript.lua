@@ -291,7 +291,7 @@ redIADS:activate()
     
 --Initializing a SET GROUP object and using Skynet's MOOSE integration to pass the redIADS EWR network data  
 DetectionSetGroup = SET_GROUP:New()
-redIADS:addMooseSetGroup(DetectionSetGroup 
+redIADS:addMooseSetGroup(DetectionSetGroup)
 
 --Creating a detection object which groups detected aircraft within a 20km sphere
 Detection = DETECTION_AREAS:New( DetectionSetGroup, 20000 )
