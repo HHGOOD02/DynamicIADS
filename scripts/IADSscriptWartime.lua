@@ -303,6 +303,10 @@ A2ADispatcher = AI_A2A_DISPATCHER:New( Detection )
 A2ADispatcher:SetEngageRadius(150000)
 A2ADispatcher:SetGciRadius(200000)
 
+--Creating and passing data for a border using the waypoints of a late activated group called "EMPIRE-BORDER"
+EmpireBorderZone = ZONE_POLYGON:New("EMPIRE-BORDER", GROUP:FindByName("EMPIRE-BORDER"))
+A2ADispatcher:SetBorderZone(EmpireBorderZone)
+
 --Setting up IAA-CAF Squadrons (Regiments)
 
     --Configuring Squadron defaults
@@ -372,7 +376,7 @@ A2ADispatcher:SetSquadronOverhead("503rd Fighter Regiment", 1.5)
     --6th Fighter Division
 A2ADispatcher:SetSquadron("601st Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- CAP @ WHISKEY STATION
 A2ADispatcher:SetSquadron("602nd Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("603rd Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- CAP @ TOPHAT STATION
+A2ADispatcher:SetSquadron("603rd Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- CAP @ WHISKEY STATION
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("601st Fighter Regiment", 2)
@@ -388,6 +392,16 @@ A2ADispatcher:SetSquadron("703rd Fighter Regiment", AIRBASE.Syria.Tabqa, "Mig-29
 A2ADispatcher:SetSquadronGrouping("701st Fighter Regiment", 2) 
 A2ADispatcher:SetSquadronGrouping("702nd Fighter Regiment", 2)
 A2ADispatcher:SetSquadronGrouping("703rd Fighter Regiment", 2) 
+
+    --8th Fighter Division
+A2ADispatcher:SetSquadron("801st Fighter Regiment", AIRBASE.Syria.Bassel_Al_Assad, "Su-27", 12) -- CAP @ TOPHAT STATION
+A2ADispatcher:SetSquadron("802nd Fighter Regiment", AIRBASE.Syria.Bassel_Al_Assad, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("803rd Fighter Regiment", AIRBASE.Syria.Bassel_Al_Assad, "Su-27", 12) -- CAP @ CHARLIE STATION
+    
+            --Setting flight size to 2 aircraft
+A2ADispatcher:SetSquadronGrouping("801st Fighter Regiment", 2) 
+A2ADispatcher:SetSquadronGrouping("802nd Fighter Regiment", 2)
+A2ADispatcher:SetSquadronGrouping("803rd Fighter Regiment", 2) 
 
 --Initializing CAP Stations from Trigger Zones
 CAPStationBACKPLATE = ZONE:New("CAP-BACKPLATE")
@@ -411,9 +425,13 @@ A2ADispatcher:SetSquadronCapInterval("701st Fighter Regiment", 1, 30, 120, 1)
 A2ADispatcher:SetSquadronCap("601st Fighter Regiment", CAPStationWHISKEY, 6000, 10000, 600, 800, 800, 1200, "BARO")
 A2ADispatcher:SetSquadronCapInterval("601st Fighter Regiment", 1, 30, 120, 1)
 
-    --TOPHAT STATION
-A2ADispatcher:SetSquadronCap("603rd Fighter Regiment", CAPStationTOPHAT, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCap("603rd Fighter Regiment", CAPStationWHISKEY, 6000, 10000, 600, 800, 800, 1200, "BARO")
 A2ADispatcher:SetSquadronCapInterval("603rd Fighter Regiment", 1, 30, 120, 1)
+
+    --TOPHAT STATION
+
+A2ADispatcher:SetSquadronCap("801st Fighter Regiment", CAPStationTOPHAT, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("801st Fighter Regiment", 1, 30, 120, 1)
 
 A2ADispatcher:SetSquadronCap("501st Fighter Regiment", CAPStationTOPHAT, 6000, 10000, 600, 800, 800, 1200, "BARO")
 A2ADispatcher:SetSquadronCapInterval("501st Fighter Regiment", 1, 30, 120, 1)
@@ -424,6 +442,9 @@ A2ADispatcher:SetSquadronCapInterval("402nd Fighter Regiment", 1, 30, 120, 1)
 
 A2ADispatcher:SetSquadronCap("403rd Fighter Regiment", CAPStationCHARLIE, 6000, 10000, 600, 800, 800, 1200, "BARO")
 A2ADispatcher:SetSquadronCapInterval("403rd Fighter Regiment", 1, 30, 120, 1)
+
+A2ADispatcher:SetSquadronCap("803rd Fighter Regiment", CAPStationCHARLIE, 6000, 10000, 600, 800, 800, 1200, "BARO")
+A2ADispatcher:SetSquadronCapInterval("803rd Fighter Regiment", 1, 30, 120, 1)
 
     --ANGEL STATION
 A2ADispatcher:SetSquadronCap("201st Fighter Regiment", CAPStationANGEL, 6000, 10000, 600, 800, 800, 1200, "BARO")
@@ -458,6 +479,8 @@ A2ADispatcher:SetSquadronGci("503rd Fighter Regiment", 800, 1200)
 A2ADispatcher:SetSquadronGci("602nd Fighter Regiment", 800, 1200)
 
 A2ADispatcher:SetSquadronGci("702nd Fighter Regiment", 800, 1200)
+
+A2ADispatcher:SetSquadronGci("802nd Fighter Regiment", 800, 1200)
 
 --Showing Display
 A2ADispatcher:SetTacticalDisplay(true)
