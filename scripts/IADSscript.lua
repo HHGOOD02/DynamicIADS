@@ -310,8 +310,8 @@ A2ADispatcher:SetBorderZone(EmpireBorderZone)
 --Setting up IAA-CAF Squadrons (Regiments)
 
     --Configuring Squadron defaults
-A2ADispatcher:SetDefaultTakeOffFromParkingCold()
-A2ADispatcher:SetDefaultLandingAtEngineShutdown()
+A2ADispatcher:SetDefaultTakeoff( A2ADispatcher.Takeoff.Cold )
+A2ADispatcher:SetDefaultLanding( A2ADispatcher.Landing.AtEngineShutdown )
 
     --1st Fighter Division
 A2ADispatcher:SetSquadron("101st Fighter Regiment", AIRBASE.Syria.Ramat_David, "Su-27", 12) -- CAP @ STEELTOE STATION
@@ -399,8 +399,8 @@ CAPStationWHISKEY = ZONE:New("CAP-WHISKEY")
 CAPStationTOPHAT = ZONE:New("CAP-TOPHAT")
 CAPStationCHARLIE = ZONE:New("CAP-CHARLIE")
 CAPStationANGEL = ZONE:New("CAP-ANGEL")
-CAPStationPOSEIDON = Zone:New("CAP-POSEIDON")
-CAPStationSTEELTOE = Zoine:New("CAP-STEELTOE")
+CAPStationPOSEIDON = ZONE:New("CAP-POSEIDON")
+CAPStationSTEELTOE = ZONE:New("CAP-STEELTOE")
 
 --Assigning CAP Missions
 
