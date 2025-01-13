@@ -291,7 +291,7 @@ redIADS:activate()
     
 --Initializing a SET GROUP object and using Skynet's MOOSE integration to pass the redIADS EWR network data  
 DetectionSetGroup = SET_GROUP:New()
-redIADS:addMooseSetGroup(DetectionSetGroup 
+redIADS:addMooseSetGroup(DetectionSetGroup)
 
 --Creating a detection object which groups detected aircraft within a 20km sphere
 Detection = DETECTION_AREAS:New( DetectionSetGroup, 20000 )
@@ -314,9 +314,9 @@ A2ADispatcher:SetDefaultTakeOffFromParkingCold()
 A2ADispatcher:SetDefaultLandingAtEngineShutdown()
 
     --1st Fighter Division
-A2ADispatcher:SetSquadron("101st Fighter Regiment", "Ramat David", "Su-27", 12) -- CAP @ STEELTOE STATION
-A2ADispatcher:SetSquadron("102nd Fighter Regiment", "Ramat David", "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("103rd Fighter Regiment", "Ramat David", "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("101st Fighter Regiment", AIRBASE.Syria.Ramat_David, "Su-27", 12) -- CAP @ STEELTOE STATION
+A2ADispatcher:SetSquadron("102nd Fighter Regiment", AIRBASE.Syria.Ramat_David, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("103rd Fighter Regiment", AIRBASE.Syria.Ramat_David, "Su-27", 12) -- GCI
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("101st Fighter Regiment", 2)
@@ -324,9 +324,9 @@ A2ADispatcher:SetSquadronGrouping("102nd Fighter Regiment", 2)
 A2ADispatcher:SetSquadronGrouping("103rd Fighter Regiment", 2)
 
     --2nd Fighter Division
-A2ADispatcher:SetSquadron("201st Fighter Regiment", "Damascus", "Mig-29", 12) -- CAP @ ANGEL STATION
-A2ADispatcher:SetSquadron("202nd Fighter Regiment", "Marj Ruhayyii", "Mig-29", 12) -- GCI
-A2ADispatcher:SetSquadron("203rd Fighter Regiment", "Marj Ruhayyii", "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("201st Fighter Regiment", AIRBASE.Syria.Damascus, "Mig-29", 12) -- CAP @ ANGEL STATION
+A2ADispatcher:SetSquadron("202nd Fighter Regiment", AIRBASE.Syria.Marj_Ruhayyil, "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("203rd Fighter Regiment", AIRBASE.Syria.Marj_Ruhayyil, "Mig-29", 12) -- GCI
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("201st Fighter Regiment", 2)
@@ -339,9 +339,9 @@ A2ADispatcher:SetSquadronOverhead("202nd Fighter Regiment", 1.5)
 A2ADispatcher:SetSquadronOverhead("203rd Fighter Regiment", 1.5)
 
     --3rd Fighter Division
-A2ADispatcher:SetSquadron("301st Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- CAP @ POSEIDON STATION
-A2ADispatcher:SetSquadron("302nd Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("303rd Fighter Regiment", "Al-Dumayr", "Su-27", 12) -- CAP @ POSEIDON STATION
+A2ADispatcher:SetSquadron("301st Fighter Regiment", AIRBASE.Syria.Al_Dumayr, "Su-27", 12) -- CAP @ POSEIDON STATION
+A2ADispatcher:SetSquadron("302nd Fighter Regiment", AIRBASE.Syria.Al_Dumayr, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("303rd Fighter Regiment", AIRBASE.Syria.Al_Dumayr, "Su-27", 12) -- CAP @ POSEIDON STATION
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("301st Fighter Regiment", 2)
@@ -349,9 +349,9 @@ A2ADispatcher:SetSquadronGrouping("302nd Fighter Regiment", 2)
 A2ADispatcher:SetSquadronGrouping("303rd Fighter Regiment", 2)
 
     --4th Fighter Division
-A2ADispatcher:SetSquadron("401st Fighter Regiment", "Shayrat", "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("402nd Fighter Regiment", "Shayrat", "Su-27", 12) -- CAP @ CHARLIE STATION
-A2ADispatcher:SetSquadron("403rd Fighter Regiment", "Shayrat", "Su-27", 12) -- CAP @ CHARLIE STATION
+A2ADispatcher:SetSquadron("401st Fighter Regiment", AIRBASE.Syria.Shayrat, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("402nd Fighter Regiment", AIRBASE.Syria.Shayrat, "Su-27", 12) -- CAP @ CHARLIE STATION
+A2ADispatcher:SetSquadron("403rd Fighter Regiment", AIRBASE.Syria.Shayrat, "Su-27", 12) -- CAP @ CHARLIE STATION
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("401st Fighter Regiment", 2)
@@ -359,9 +359,9 @@ A2ADispatcher:SetSquadronGrouping("402nd Fighter Regiment", 2)
 A2ADispatcher:SetSquadronGrouping("403rd Fighter Regiment", 2)
 
     --5th Fighter Division
-A2ADispatcher:SetSquadron("501st Fighter Regiment", "Hama", "Mig-29", 12) -- CAP @ TOPHAT STATION
-A2ADispatcher:SetSquadron("502nd Fighter Regiment", "Hama", "Mig-29", 12) -- GCI
-A2ADispatcher:SetSquadron("503rd Fighter Regiment", "Hama", "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("501st Fighter Regiment", AIRBASE.Syria.Hama, "Mig-29", 12) -- CAP @ TOPHAT STATION
+A2ADispatcher:SetSquadron("502nd Fighter Regiment", AIRBASE.Syria.Hama, "Mig-29", 12) -- GCI
+A2ADispatcher:SetSquadron("503rd Fighter Regiment", AIRBASE.Syria.Hama, "Mig-29", 12) -- GCI
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("501st Fighter Regiment", 2)
@@ -374,9 +374,9 @@ A2ADispatcher:SetSquadronOverhead("502nd Fighter Regiment", 1.5)
 A2ADispatcher:SetSquadronOverhead("503rd Fighter Regiment", 1.5)
 
     --6th Fighter Division
-A2ADispatcher:SetSquadron("601st Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- CAP @ WHISKEY STATION
-A2ADispatcher:SetSquadron("602nd Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("603rd Fighter Regiment", "Abu al-Duhur", "Su-27", 12) -- CAP @ TOPHAT STATION
+A2ADispatcher:SetSquadron("601st Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- CAP @ WHISKEY STATION
+A2ADispatcher:SetSquadron("602nd Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("603rd Fighter Regiment", AIRBASE.Syria.Abu_al_Duhur, "Su-27", 12) -- CAP @ TOPHAT STATION
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("601st Fighter Regiment", 2)
@@ -384,9 +384,9 @@ A2ADispatcher:SetSquadronGrouping("602nd Fighter Regiment", 2)
 A2ADispatcher:SetSquadronGrouping("603rd Fighter Regiment", 2)
 
     --7th Fighter Division
-A2ADispatcher:SetSquadron("701st Fighter Regiment", "Jirah", "Su-27", 12) -- CAP @ WHISKEY STATION
-A2ADispatcher:SetSquadron("702nd Fighter Regiment", "Jirah", "Su-27", 12) -- GCI
-A2ADispatcher:SetSquadron("703rd Fighter Regiment", "Tabqa", "Su-27", 12) -- CAP @ BACKPLATE STATION
+A2ADispatcher:SetSquadron("701st Fighter Regiment", AIRBASE.Syria.Jirah, "Su-27", 12) -- CAP @ WHISKEY STATION
+A2ADispatcher:SetSquadron("702nd Fighter Regiment", AIRBASE.Syria.Jirah, "Su-27", 12) -- GCI
+A2ADispatcher:SetSquadron("703rd Fighter Regiment", AIRBASE.Syria.Tabqa, "Su-27", 12) -- CAP @ BACKPLATE STATION
 
         --Setting flight size to 2 aircraft
 A2ADispatcher:SetSquadronGrouping("701st Fighter Regiment", 2) 
